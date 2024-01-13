@@ -1,0 +1,27 @@
+{
+    "name": "cevek-utils",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "typings": "dist",
+    "private": false,
+    "scripts": {
+        "test": "jest",
+        "prepublishOnly": "tsc && jest"
+    },
+    "files": [
+        "src/*",
+        "dist/*"
+    ],
+    "author": "cevek",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/jest": "^29.5.11",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.1.1",
+        "typescript": "^5.3.3"
+    },
+    "dependencies": {
+        "@types/node": "^20.11.0"
+    }
+}
