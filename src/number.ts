@@ -41,3 +41,7 @@ export function toPercent(val: string | number) {
     if (typeof val !== 'number') return undefined;
     return Math.min(Math.max(val, 0), 1);
 }
+
+export function calcPercent(start: number, end: number) {
+    return (end - start) / start;
+}
