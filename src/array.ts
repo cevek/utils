@@ -1,4 +1,4 @@
-import { kv } from "./object";
+import {kv} from './object';
 
 export function findSubArray<A, B>(arr: A[], subarr: B[], compare: (a: A, b: B) => boolean) {
     const arrLength = arr.length;
@@ -61,7 +61,7 @@ export function filterNonUndefined<T>(arr: (T | undefined)[]): T[] {
     return arr.filter((v): v is T => v !== undefined);
 }
 
-export function groupBy<T>(arr: T[], key: (item: T) => string) {
+export function groupObjBy<T>(arr: T[], key: (item: T) => string) {
     const obj = {} as Record<string, T[]>;
     for (const item of arr) {
         const k = key(item);
@@ -75,7 +75,22 @@ export function groupBy<T>(arr: T[], key: (item: T) => string) {
     return obj;
 }
 
-export function groupByOne<T, K extends string>(arr: T[], key: (item: T) => K) {
+type GroupByKey = string | number | bigint | symbol | boolean;
+export function groupBy<T, K extends GroupByKey>(arr: T[], key: (item: T) => K) {
+    const obj = new Map<K, T[]>();
+    for (const item of arr) {
+        const k = key(item);
+        let items = obj.get(k);
+        if (items === undefined) {
+            items = [];
+            obj.set(k, items);
+        }
+        items.push(item);
+    }
+    return obj;
+}
+
+export function groupObjOneBy<T, K extends string | number>(arr: T[], key: (item: T) => K) {
     const obj = {} as Record<K, T>;
     for (const item of arr) {
         const k = key(item);
@@ -83,8 +98,16 @@ export function groupByOne<T, K extends string>(arr: T[], key: (item: T) => K) {
     }
     return obj;
 }
+export function groupOneBy<T, K extends GroupByKey>(arr: T[], key: (item: T) => K) {
+    const obj = new Map<K, T>();
+    for (const item of arr) {
+        const k = key(item);
+        obj.set(k, item);
+    }
+    return obj;
+}
 
-export function groupBy2<T, K1 extends number | string, K2 extends number | string>(
+export function groupGroupOneObjBy<T, K1 extends number | string, K2 extends number | string>(
     arr: T[],
     key: (item: T) => [K1, K2],
 ) {
@@ -100,7 +123,19 @@ export function groupBy2<T, K1 extends number | string, K2 extends number | stri
     }
     return obj;
 }
-
+export function groupGroupOneBy<T, K1 extends GroupByKey, K2 extends GroupByKey>(arr: T[], key: (item: T) => [K1, K2]) {
+    const obj = new Map<K1, Map<K2, T>>();
+    for (const item of arr) {
+        const [k1, k2] = key(item);
+        let sub = obj.get(k1);
+        if (sub === undefined) {
+            sub = new Map();
+            obj.set(k1, sub);
+        }
+        sub.set(k2, item);
+    }
+    return obj;
+}
 
 export function createZeroArray(len: number) {
     return Array.from({length: len}, () => 0);

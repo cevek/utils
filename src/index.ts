@@ -1,6 +1,7 @@
 export * from './array';
 export * from './coords';
 export * from './createResolvablePromise';
+export * from './createHistogram';
 export * from './csv';
 export * from './fs';
 export * from './gradient';
@@ -15,3 +16,4 @@ export * from './streamToPromise';
 export * from './string';
 export * from './svg';
 export * from './throttle';
+export * from './runJobWithRetries';
