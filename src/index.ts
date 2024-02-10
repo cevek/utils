@@ -7,6 +7,7 @@ export * from './fs';
 export * from './gradient';
 export * from './localStorage';
 export * from './null';
+export * from './map';
 export * from './number';
 export * from './object';
 export * from './queue';
