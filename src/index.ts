@@ -6,6 +6,7 @@ export * from './csv';
 export * from './fs';
 export * from './gradient';
 export * from './localStorage';
+export * from './hash';
 export * from './null';
 export * from './map';
 export * from './number';
